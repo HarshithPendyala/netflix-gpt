@@ -1,23 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import { createBrowserRouter,RouterProvider } from 'react-router-dom';
+
+import Login from './components/Login';
+
+import Browse from './components/Browse';
+import { useEffect } from 'react';
+import {  onAuthStateChanged } from "firebase/auth";
+import { useDispatch } from 'react-redux';
+import { addUser, removeUser } from './utils/userSlice';
+import { auth } from './utils/firebase';
+
+
 
 function App() {
+  const dipatch = useDispatch();
+    useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const {uid,email,displayName} = user;
+        dipatch(addUser({email: email, uid: uid, displayName: displayName}))
+        // ...
+      } else {
+        // User is signed out
+        // ...
+        dipatch(removeUser());
+      }
+    });
+  },[]) 
+  
+
+  const appRouter = createBrowserRouter([
+    {
+      path:"/",
+      element: <Login />
+    },
+    {
+      path:"/browse",
+      element: <Browse />
+    }
+  ])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>   
+     
+       <RouterProvider router={appRouter} /> 
+     
     </div>
   );
 }
