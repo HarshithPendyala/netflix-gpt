@@ -12,4 +12,5 @@
 - Redux store to save signed in user
 - Implemented sign out
 - BugFix - No access to site without proper Authentication
+- Unsubscribe to onAuthStateChanged when compoenet unmounts
 
