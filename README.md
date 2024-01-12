@@ -13,4 +13,5 @@
 - Implemented sign out
 - BugFix - No access to site without proper Authentication
 - Unsubscribe to onAuthStateChanged when compoenet unmounts
+- fetched data from TMDB API and update store
 
