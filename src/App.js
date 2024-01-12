@@ -12,22 +12,6 @@ import { auth } from './utils/firebase';
 
 
 function App() {
-  const dipatch = useDispatch();
-    useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        const {uid,email,displayName} = user;
-        dipatch(addUser({email: email, uid: uid, displayName: displayName}))
-        // ...
-      } else {
-        // User is signed out
-        // ...
-        dipatch(removeUser());
-      }
-    });
-  },[]) 
-  
-
   const appRouter = createBrowserRouter([
     {
       path:"/",

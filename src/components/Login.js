@@ -3,7 +3,7 @@ import Header from './Header'
 import { checkValidData } from '../utils/Validate';
 import { auth } from '../utils/firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { useNavigate } from 'react-router-dom';
+
 
 
 
@@ -11,7 +11,6 @@ import { useNavigate } from 'react-router-dom';
 const Login = () => {
     const [isSignUpForm, setIsSignUpForm] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-    const navigate = useNavigate();
     const name = useRef(null);
     const email = useRef(null);
     const password = useRef(null);
@@ -38,12 +37,10 @@ const Login = () => {
                   }).then(() => {
                     // Profile updated!
                     // ...
-                    navigate("/browse");
                   }).catch((error) => {
                     setErrorMessage(error.message);
                   });
                 
-                console.log("SignedUp" ,user);
             })
             .catch((error) => {
                 //console.log(error.code + "-" + error.message);
@@ -56,8 +53,6 @@ const Login = () => {
             signInWithEmailAndPassword(auth, email.current.value,password.current.value)
             .then((userCredential) => {
                 const user = userCredential.user;
-                navigate("/browse");
-                console.log("SignIn: ",user);
             })
             .catch((error) => {
                 setErrorMessage(error.message)
