@@ -43,15 +43,15 @@ const Header = () => {
     
     <>
      
-      <div className='absolute w-screen py-8 px-2 bg-gradient-to-b from-black z-10 flex justify-between bg-transparent'>
+      <div className='absolute w-screen pl-16 pt-4 bg-gradient-to-b from-black z-10 flex justify-between bg-transparent'>
           <img 
-              className='w-44'
+              className='w-40'
               src={NetflixLogo} alt='logo' />
-          {user && <div className='flex w-44 h-12'>
+          {user && <div className='flex w-44 h-12 my-2'>
           <img className='p-0.5'
               src={UserLogo} alt='user-img' />
                 
-          <button className="p-2.5  text-white bg-red-500 border rounded-md shadow-sm outline-none appearance-none" onClick={handleSignOut}>
+          <button className="px-4 ml-1 font-bold text-red-500 border border-red-500 rounded-md shadow-sm hover:bg-red-500 hover:text-white" onClick={handleSignOut}>
             Sign-Out
           </button>
           </div>}
