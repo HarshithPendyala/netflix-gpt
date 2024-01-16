@@ -20,7 +20,6 @@ const Login = () => {
     const handleSignUpToggle = () =>{
         setIsSignUpForm(!isSignUpForm);
     }
-    console.log(isSignUpForm);
     const handleFormSubmit = () => {
         const result = checkValidData(email.current.value,password.current.value);
         setErrorMessage(result);
@@ -43,20 +42,17 @@ const Login = () => {
                 
             })
             .catch((error) => {
-                //console.log(error.code + "-" + error.message);
                 setErrorMessage(error.code + "-" + error.message)
             })
         }
         else{
             //sign-in Logic
-            console.log("sign In Logic");
             signInWithEmailAndPassword(auth, email.current.value,password.current.value)
             .then((userCredential) => {
                 const user = userCredential.user;
             })
             .catch((error) => {
                 setErrorMessage(error.message)
-                //console.log(error.code + "-" + error.message);
             })
         }
     }
