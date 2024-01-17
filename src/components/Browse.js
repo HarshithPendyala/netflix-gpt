@@ -13,7 +13,7 @@ const Browse = () => {
 	usePopularMovies();
 	useTopRatedMovies();
 	useUpcomingMovies();
-	const showGptSearch = useSelector((store) => store.gptSearch.showGptSearch);
+	const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
 	return (
 		<>
 			<Header />

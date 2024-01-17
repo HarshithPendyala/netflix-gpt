@@ -12,7 +12,7 @@ import { setSelectedLang } from "../utils/configSlice";
 const Header = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	const showGptSearch = useSelector((store) => store.gptSearch.showGptSearch);
+	const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
 	const user = useSelector((store) => store.user);
 
 	const handleSignOut = () => {
@@ -60,7 +60,7 @@ const Header = () => {
 					<div className="flex flex-wrap h-12 justify-between">
 						{showGptSearch && (
 							<select
-								className="p-2 my-1 bg-gray-600 text-gray-300"
+								className="p-2 my-1 bg-gray-600 text-gray-300 rounded-md"
 								onChange={(event) => handleLanguageOptions(event)}
 							>
 								{languageOptions.map((lang) => (
@@ -74,7 +74,7 @@ const Header = () => {
 							className="text-white font-semibold bg-purple-700 px-4 rounded-lg mx-2"
 							onClick={handleGptSearch}
 						>
-							GPT Search
+							{showGptSearch ? "Homepage" : "GPT Search"}
 						</button>
 						<img
 							className="p-0.5 w-12 rounded-sm"
