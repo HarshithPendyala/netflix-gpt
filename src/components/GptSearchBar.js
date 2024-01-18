@@ -24,12 +24,8 @@ const GptSearchBar = () => {
 			model: "gpt-3.5-turbo",
 		});
 		const gptMovies = chatCompletion.choices?.[0]?.message?.content.split(", ");
-		console.log(gptMovies);
-
 		const promiseArray = gptMovies.map((movie) => getRecommendedMovies(movie));
 		const recommendedMovies = await Promise.all(promiseArray);
-
-		console.log("results", recommendedMovies);
 		dispatch(
 			addResults({ gptMovies: gptMovies, tmdbMovies: recommendedMovies })
 		);
