@@ -11,7 +11,7 @@ const GptSearchSuggestions = () => {
 	return (
 		<div className="bg-black text-white font-bold text-2xl py-4 px-8 m-4 bg-opacity-70">
 			<div>
-				{gptResults.map((res, index) => (
+				{gptResults?.map((res, index) => (
 					<MovieList
 						key={res}
 						movies={tmdbResults?.[index]?.results}
