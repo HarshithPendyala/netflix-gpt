@@ -54,13 +54,13 @@ const Header = () => {
 
 	return (
 		<>
-			<div className="absolute w-full pl-16 pt-4 bg-gradient-to-b from-black z-10 flex flex-wrap justify-between bg-transparent">
-				<img className="w-40" src={NetflixLogo} alt="logo" />
+			<div className="absolute w-full md:px-10 md:pt-4 pb-4 bg-gradient-to-b lg:from-black z-10 flex flex-col md:flex-row  md:justify-between">
+				<img className="w-40 mx-auto md:mx-0" src={NetflixLogo} alt="logo" />
 				{user && (
-					<div className="flex flex-wrap h-12 justify-between">
+					<div className="flex flex-wrap h-12 mx-auto md:mx-0 md:justify-between">
 						{showGptSearch && (
 							<select
-								className="p-2 my-1 bg-gray-600 text-gray-300 rounded-md"
+								className="p-2 my-1 mx-2 bg-gray-600 text-gray-300 rounded-md"
 								onChange={(event) => handleLanguageOptions(event)}
 							>
 								{languageOptions.map((lang) => (
@@ -71,18 +71,18 @@ const Header = () => {
 							</select>
 						)}
 						<button
-							className="text-white font-semibold bg-purple-700 px-4 rounded-lg mx-2"
+							className="text-white font-semibold bg-purple-700 text-sm lg:text-base px-2 lg:px-6 rounded-md mx-2"
 							onClick={handleGptSearch}
 						>
 							{showGptSearch ? "Homepage" : "GPT Search"}
 						</button>
 						<img
-							className="p-0.5 w-12 rounded-sm"
+							className="p-0.5 w-12 rounded-sm hidden"
 							src={UserLogo}
 							alt="user-img"
 						/>
 						<button
-							className="px-4 ml-1 mr-2 font-bold text-red-500 border border-red-500 rounded-md shadow-sm hover:bg-red-500 hover:text-white"
+							className="text-sm lg:text-base px-4 lg:px-6 ml-1 font-bold text-red-500 border border-red-500 rounded-md shadow-sm hover:bg-red-500 hover:text-white"
 							onClick={handleSignOut}
 						>
 							Sign-Out

@@ -12,7 +12,7 @@ const GptSearchBar = () => {
 	const dispatch = useDispatch();
 
 	const handleGptSearchClick = async () => {
-		console.log(searchRef.current.value);
+		dispatch(addResults({ gptMovies: null, tmdbMovies: null }));
 
 		const gptQuery =
 			"Act like a movie recommendation system. Sugges me 5 movies, comma seperated for this query:" +
@@ -26,6 +26,9 @@ const GptSearchBar = () => {
 		const gptMovies = chatCompletion.choices?.[0]?.message?.content.split(", ");
 		const promiseArray = gptMovies.map((movie) => getRecommendedMovies(movie));
 		const recommendedMovies = await Promise.all(promiseArray);
+		const filterData = recommendedMovies.map((rc, index) =>
+			rc.results?.filter((movie) => movie.original_title == gptMovies[index])
+		);
 		dispatch(
 			addResults({ gptMovies: gptMovies, tmdbMovies: recommendedMovies })
 		);
@@ -44,9 +47,9 @@ const GptSearchBar = () => {
 	};
 
 	return (
-		<div className="pt-[10%] flex justify-center">
+		<div className="pt-[50%] md:pt-[10%] flex justify-center">
 			<form
-				className=" grid grid-cols-12 w-1/2"
+				className=" grid grid-cols-12 w-full md:w-1/2 mx-2"
 				onSubmit={(e) => e.preventDefault()}
 			>
 				<input
