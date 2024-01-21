@@ -8,7 +8,7 @@ const usePopularMovies = async () => {
 	const popularMovies = useSelector((store) => store.movies?.popularMovies);
 	const getPopularMovies = async () => {
 		const data = await fetch(
-			"https://api.themoviedb.org/3/movie/now_playing?page=2",
+			"http://localhost:8080/popularMovies",
 			API_GET_OPTIONS
 		);
 		const jsonData = await data.json();
