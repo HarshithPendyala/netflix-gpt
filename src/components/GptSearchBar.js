@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { lang } from "../utils/languageConstants";
 import { useDispatch, useSelector } from "react-redux";
 import { useRef } from "react";
@@ -7,12 +7,14 @@ import { API_GET_OPTIONS } from "../utils/constants";
 import { addResults } from "../utils/gptSearchSlice";
 
 const GptSearchBar = () => {
+	const [loading, setLoading] = useState(false);
 	const langValue = useSelector((store) => store.config.lang);
 	const searchRef = useRef(null);
 	const dispatch = useDispatch();
 
 	const handleGptSearchClick = async () => {
 		dispatch(addResults({ gptMovies: null, tmdbMovies: null }));
+		setLoading(true);
 
 		const url = "http://localhost:8080/gptSearch/" + searchRef.current.value;
 		const openAIResults = await fetch(url, API_GET_OPTIONS);
@@ -20,6 +22,7 @@ const GptSearchBar = () => {
 		const gptMovies = jsonResults.choices?.[0]?.message?.content.split("~");
 		const promiseArray = gptMovies.map((movie) => getRecommendedMovies(movie));
 		const recommendedMovies = await Promise.all(promiseArray);
+		setLoading(false);
 
 		dispatch(
 			addResults({ gptMovies: gptMovies, tmdbMovies: recommendedMovies })
@@ -28,9 +31,8 @@ const GptSearchBar = () => {
 
 	const getRecommendedMovies = async (movie) => {
 		const data = await fetch(
-			"https://api.themoviedb.org/3/search/movie?query=" +
-				movie +
-				"&include_adult=false&language=en-US&page=1",
+			"http://localhost:8080/gptMovies/" + movie,
+
 			API_GET_OPTIONS
 		);
 
@@ -51,10 +53,10 @@ const GptSearchBar = () => {
 					placeholder={lang[langValue].placeholder}
 				/>
 				<button
-					className="p-2 m-2 rounded-lg bg-purple-600 text-white col-span-3"
+					className="p-2 m-2 rounded-lg bg-purple-600 text-white col-span-3 font-bold"
 					onClick={handleGptSearchClick}
 				>
-					{lang[langValue].button}
+					{loading ? <i>Loading....</i> : lang[langValue].button}
 				</button>
 			</form>
 		</div>
