@@ -86,3 +86,14 @@ app.get("/gptSearch/:query", async (req, res) => {
 	});
 	res.send(chatCompletion);
 });
+
+app.get("/gptMovies/:query", (req, res) => {
+	console.log(req.params.query);
+	fetch(
+		`https://api.themoviedb.org/3/search/movie?query=${req.params.query}&include_adult=false&language=en-US&page=1`,
+		options
+	)
+		.then((response) => response.json())
+		.then((data) => res.send(data))
+		.catch((err) => console.log("Error in fetching gpt movies: ", err));
+});
