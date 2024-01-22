@@ -14,21 +14,13 @@ const GptSearchBar = () => {
 	const handleGptSearchClick = async () => {
 		dispatch(addResults({ gptMovies: null, tmdbMovies: null }));
 
-		const gptQuery =
-			"Act like a movie recommendation system. Sugges me 5 movies, comma seperated for this query:" +
-			searchRef.current.value +
-			" Example Result: The Avengers, The Batman, Herapheri, John Wick, Bullet Train";
-
-		const chatCompletion = await openai.chat.completions.create({
-			messages: [{ role: "user", content: gptQuery }],
-			model: "gpt-3.5-turbo",
-		});
-		const gptMovies = chatCompletion.choices?.[0]?.message?.content.split(", ");
+		const url = "http://localhost:8080/gptSearch/" + searchRef.current.value;
+		const openAIResults = await fetch(url, API_GET_OPTIONS);
+		const jsonResults = await openAIResults.json();
+		const gptMovies = jsonResults.choices?.[0]?.message?.content.split("~");
 		const promiseArray = gptMovies.map((movie) => getRecommendedMovies(movie));
 		const recommendedMovies = await Promise.all(promiseArray);
-		const filterData = recommendedMovies.map((rc, index) =>
-			rc.results?.filter((movie) => movie.original_title == gptMovies[index])
-		);
+
 		dispatch(
 			addResults({ gptMovies: gptMovies, tmdbMovies: recommendedMovies })
 		);

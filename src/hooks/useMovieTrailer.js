@@ -8,12 +8,11 @@ const useMovieTrailer = (movieId) => {
 	const trailer = useSelector((store) => store.movies?.trailer);
 	const movieVideos = async () => {
 		const movieVideosData = await fetch(
-			"https://api.themoviedb.org/3/movie/" +
-				movieId +
-				"/videos?language=en-US",
+			"http://localhost:8080/trailer/" + movieId,
 			API_GET_OPTIONS
 		);
 		const jsonData = await movieVideosData.json();
+		console.log("Movie Videos", jsonData);
 		const filterData = jsonData.results?.filter(
 			(video) => video.type === "Trailer"
 		);
