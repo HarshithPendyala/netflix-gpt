@@ -1,18 +1,38 @@
 import React from "react";
 import { IMG_CDN_PATH } from "../utils/constants";
-import { Breathing, Image, Shimmer } from "react-shimmer";
+import { Breathing, Image } from "react-shimmer";
+import { setModal, setMovieInfo } from "../utils/configSlice";
+import { useDispatch } from "react-redux";
+import { API_GET_OPTIONS } from "../utils/constants";
 
-const MovieCard = ({ poster_path, title }) => {
+const MovieCard = ({ poster_path, title, movieId }) => {
+	const dispatch = useDispatch();
+	const getMovieInfo = async () => {
+		const info = await fetch(
+			`http://localhost:8080/api/getMovieInfo/${movieId}`,
+			API_GET_OPTIONS
+		);
+		const jsonInfo = await info.json();
+		console.log("movieInfo:", jsonInfo);
+		dispatch(setMovieInfo(jsonInfo));
+	};
+
+	const handleOnClick = () => {
+		dispatch(setModal(true));
+		getMovieInfo();
+	};
 	if (poster_path == null) return;
 	return (
-		<div className="w-32 md:w-44 mr-4">
-			<Image
-				alt={title}
-				src={IMG_CDN_PATH + poster_path}
-				fallback={<Breathing width={176} height={264}></Breathing>}
-				fadeIn={true}
-			/>
-		</div>
+		<>
+			<div className="w-32 md:w-44 mr-4" onClick={handleOnClick}>
+				<Image
+					alt={title}
+					src={IMG_CDN_PATH + poster_path}
+					fallback={<Breathing width={176} height={264}></Breathing>}
+					fadeIn={true}
+				/>
+			</div>
+		</>
 	);
 };
 

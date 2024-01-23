@@ -8,7 +8,7 @@ const useUpcomingMovies = () => {
 	const upcomingMovies = useSelector((store) => store.movies?.upcomingMovies);
 	const getUpcomingMovies = async () => {
 		const data = await fetch(
-			"http://localhost:8080/upComingMovies",
+			"http://localhost:8080/api/upComingMovies",
 			API_GET_OPTIONS
 		);
 		const jsonData = await data.json();

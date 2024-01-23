@@ -7,6 +7,7 @@ import useTopRatedMovies from "../hooks/useTopRatedMovies";
 import useUpcomingMovies from "../hooks/useUpcomingMovies";
 import { useSelector } from "react-redux";
 import GPTSearch from "./GPTSearch";
+import MovieInfo from "./MovieInfo";
 
 const Browse = () => {
 	useNowPlayingMovies();
@@ -23,6 +24,7 @@ const Browse = () => {
 				<>
 					<MainContainer />
 					<SecondaryContainer />
+					<MovieInfo />
 				</>
 			)}
 		</>

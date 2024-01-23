@@ -16,7 +16,8 @@ const GptSearchBar = () => {
 		dispatch(addResults({ gptMovies: null, tmdbMovies: null }));
 		setLoading(true);
 
-		const url = "http://localhost:8080/gptSearch/" + searchRef.current.value;
+		const url =
+			"http://localhost:8080/api/gptSearch/" + searchRef.current.value;
 		const openAIResults = await fetch(url, API_GET_OPTIONS);
 		const jsonResults = await openAIResults.json();
 		const gptMovies = jsonResults.choices?.[0]?.message?.content.split("~");
@@ -31,7 +32,7 @@ const GptSearchBar = () => {
 
 	const getRecommendedMovies = async (movie) => {
 		const data = await fetch(
-			"http://localhost:8080/gptMovies/" + movie,
+			"http://localhost:8080/api/gptMovies/" + movie,
 
 			API_GET_OPTIONS
 		);
