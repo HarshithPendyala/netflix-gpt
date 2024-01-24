@@ -8,7 +8,7 @@ const useMovieTrailer = (movieId) => {
 	const trailer = useSelector((store) => store.movies?.trailer);
 	const movieVideos = async () => {
 		const movieVideosData = await fetch(
-			"http://localhost:8080/api/trailer/" + movieId,
+			process.env.REACT_APP_SERVER_URL + `/api/trailer/${movieId}`,
 			API_GET_OPTIONS
 		);
 		const jsonData = await movieVideosData.json();

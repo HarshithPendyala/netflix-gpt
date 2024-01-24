@@ -8,10 +8,11 @@ const useNowPlayingMovies = () => {
 	const nowPlayingMovies = useSelector(
 		(store) => store.movies?.nowPlayingMovies
 	);
-
+	const url = `${process.env.REACT_APP_SERVER_URL}/api/nowPlayingMovies`;
+	console.log("nowPlaying Movies URL: ", url);
 	const getNowPlayingMovies = async () => {
 		const data = await fetch(
-			"http://localhost:8080/api/nowPlayingMovies",
+			`${process.env.REACT_APP_SERVER_URL}` + "/api/nowPlayingMovies",
 			API_GET_OPTIONS
 		);
 		const jsonData = await data.json();

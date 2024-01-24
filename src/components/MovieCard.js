@@ -9,11 +9,10 @@ const MovieCard = ({ poster_path, title, movieId }) => {
 	const dispatch = useDispatch();
 	const getMovieInfo = async () => {
 		const info = await fetch(
-			`http://localhost:8080/api/getMovieInfo/${movieId}`,
+			process.env.REACT_APP_SERVER_URL + `/api/getMovieInfo/${movieId}`,
 			API_GET_OPTIONS
 		);
 		const jsonInfo = await info.json();
-		console.log("movieInfo:", jsonInfo);
 		dispatch(setMovieInfo(jsonInfo));
 	};
 
@@ -24,7 +23,10 @@ const MovieCard = ({ poster_path, title, movieId }) => {
 	if (poster_path == null) return;
 	return (
 		<>
-			<div className="w-32 md:w-44 mr-4" onClick={handleOnClick}>
+			<div
+				className="w-32 md:w-44 mr-4 hover:cursor-pointer"
+				onClick={handleOnClick}
+			>
 				<Image
 					alt={title}
 					src={IMG_CDN_PATH + poster_path}

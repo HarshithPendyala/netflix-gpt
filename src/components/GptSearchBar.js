@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { lang } from "../utils/languageConstants";
 import { useDispatch, useSelector } from "react-redux";
 import { useRef } from "react";
-import openai from "../utils/openAI";
+
 import { API_GET_OPTIONS } from "../utils/constants";
 import { addResults } from "../utils/gptSearchSlice";
 
@@ -16,8 +16,7 @@ const GptSearchBar = () => {
 		dispatch(addResults({ gptMovies: null, tmdbMovies: null }));
 		setLoading(true);
 
-		const url =
-			"http://localhost:8080/api/gptSearch/" + searchRef.current.value;
+		const url = `${process.env.REACT_APP_SERVER_URL}/api/gptSearch/${searchRef.current.value}`;
 		const openAIResults = await fetch(url, API_GET_OPTIONS);
 		const jsonResults = await openAIResults.json();
 		const gptMovies = jsonResults.choices?.[0]?.message?.content.split("~");
@@ -32,7 +31,7 @@ const GptSearchBar = () => {
 
 	const getRecommendedMovies = async (movie) => {
 		const data = await fetch(
-			"http://localhost:8080/api/gptMovies/" + movie,
+			process.env.REACT_APP_SERVER_URL + `/api/gptMovies/${movie}`,
 
 			API_GET_OPTIONS
 		);

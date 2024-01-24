@@ -36,7 +36,7 @@ const MovieInfo = () => {
 						</h1>
 						<div className="flex">
 							<p className="my-2 mx-2 bg-gray-800 text-gray-400 font-bold text-xl rounded-md w-fit p-2 h-10">
-								{movieInfo?.release_date.slice(0, 4)}
+								{movieInfo?.release_date?.slice(0, 4)}
 							</p>
 							<p className="bg-gray-800 text-gray-400 font-bold text-xl rounded-md w-fit p-2 h-10 my-2 mx-2">
 								{movieInfo?.runtime} mins

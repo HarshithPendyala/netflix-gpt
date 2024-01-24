@@ -8,7 +8,7 @@ const useTopRatedMovies = () => {
 	const topRatedMovies = useSelector((store) => store.movies?.topRatedMovies);
 	const getTopRatedMovies = async () => {
 		const data = await fetch(
-			"http://localhost:8080/api/topRatedMovies",
+			`${process.env.REACT_APP_SERVER_URL}/api/topRatedMovies`,
 			API_GET_OPTIONS
 		);
 		const jsonData = await data.json();

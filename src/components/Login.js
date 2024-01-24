@@ -68,14 +68,18 @@ const Login = () => {
 		<div>
 			<Header />
 			<div className="absolute">
-				<img className="" src={BG_URL} alt="bg-img" />
+				<img
+					className="w-screen h-screen fixed object-cover brightness-50"
+					src={BG_URL}
+					alt="bg-img"
+				/>
 			</div>
 
 			<form
-				className="absolute bg-black/80 mx-auto left-0 right-0 px-12 py-14 my-28 w-3/12 h-fit text-white"
+				className="absolute bg-black/80 mx-auto left-0 right-0 px-12 py-14 my-28 md:my-16 lg:my-28 w-10/12 md:w-6/12 lg:w-3/12  text-white h-fit"
 				onSubmit={(e) => e.preventDefault()}
 			>
-				<h3 className="py-4 font-bold text-3xl">
+				<h3 className="py-4 font-bold text-xl lg:text-3xl">
 					{!isSignUpForm ? "Sign In" : "Sign Up"}
 				</h3>
 				{isSignUpForm && (
@@ -83,14 +87,14 @@ const Login = () => {
 						type="text"
 						placeholder="Username"
 						ref={name}
-						className="p-4 my-4 w-full bg-zinc-800 rounded-md"
+						className="p-4 my-2 lg:my-4 w-full bg-zinc-800 rounded-md"
 					/>
 				)}
 				<input
 					type="email"
 					ref={email}
 					placeholder="Email or Phone number"
-					className={`p-4  w-full bg-zinc-800 rounded-md ${
+					className={`p-4 w-full bg-zinc-800 rounded-md ${
 						errorMessage.includes("email") ? "border-b-2 border-orange-400" : ""
 					}`}
 				/>
@@ -103,7 +107,7 @@ const Login = () => {
 					type="password"
 					ref={password}
 					placeholder="Password"
-					className={`p-4 mt-6 w-full bg-zinc-800 rounded-md ${
+					className={`p-4 my-2 lg:mt-6 w-full bg-zinc-800 rounded-md ${
 						errorMessage.includes("password")
 							? "border-b-2 border-orange-400"
 							: ""

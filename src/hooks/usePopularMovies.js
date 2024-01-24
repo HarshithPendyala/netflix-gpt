@@ -8,7 +8,7 @@ const usePopularMovies = async () => {
 	const popularMovies = useSelector((store) => store.movies?.popularMovies);
 	const getPopularMovies = async () => {
 		const data = await fetch(
-			"http://localhost:8080/api/popularMovies",
+			`${process.env.REACT_APP_SERVER_URL}/api/popularMovies`,
 			API_GET_OPTIONS
 		);
 		const jsonData = await data.json();
