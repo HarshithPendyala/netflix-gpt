@@ -8,6 +8,7 @@ import { NetflixLogo, UserLogo } from "../utils/constants";
 import { toggleGptSearch } from "../utils/gptSearchSlice";
 import { languageOptions } from "../utils/languageConstants";
 import { setSelectedLang } from "../utils/configSlice";
+import { addResults } from "../utils/gptSearchSlice";
 
 const Header = () => {
 	const navigate = useNavigate();
@@ -18,6 +19,7 @@ const Header = () => {
 	const handleSignOut = () => {
 		signOut(auth)
 			.then(() => {
+				dispatch(addResults({ gptMovies: null, tmdbMovies: null }));
 				navigate("/");
 			})
 			.catch((error) => {
