@@ -1,4 +1,4 @@
-# Netflix GPT
+# Netflix GPT | [Live demo](https://netflix-gpt-en39.onrender.com/)
 
 - Create React App
 - Tailwind CSS
